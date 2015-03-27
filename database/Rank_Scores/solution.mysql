@@ -1,0 +1,5 @@
+SELECT Scores.score , count(*) AS Rank
+From Scores, (SELECT DISTINCT Score FROM Scores) AS tmp
+WHERE Scores.score <= tmp.score
+GROUP BY Scores.Id, Scores.score
+ORDER BY Rank;

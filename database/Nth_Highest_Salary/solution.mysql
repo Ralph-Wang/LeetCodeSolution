@@ -1,0 +1,6 @@
+SELECT Employee.Salary
+FROM Employee, (SELECT DISTINCT Salary FROM Employee) as tmp
+WHERE Employee.Salary <= tmp.Salary
+GROUP BY Employee.Id, Employee.Salary
+HAVING COUNT(*)=4
+LIMIT 1
