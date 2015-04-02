@@ -1,0 +1,2 @@
+DELETE a FROM Person as a, Person as b
+WHERE a.Email = b.Email AND a.Id > b.Id

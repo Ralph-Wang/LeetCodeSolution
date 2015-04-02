@@ -1,0 +1,7 @@
+SELECT d.Name AS Department, e.Name AS Employee, e.Salary 
+FROM Employee AS e, Department AS d, (SELECT DISTINCT Salary, DepartmentId FROM Employee) as e2
+WHERE e.DepartmentId = d.Id
+and e2.DepartmentId = d.Id
+AND e.Salary <= e2.Salary
+GROUP BY e.Id HAVING COUNT(e.ID) < 4
+ORDER BY Department ASC, Salary DESC
