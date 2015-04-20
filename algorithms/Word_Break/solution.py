@@ -19,11 +19,11 @@ class Solution:
 
 
 cases = [
-        ('leetcode', {'leet', 'code'}),
-        ('aaaaaaa', {'aaaa', 'aaa'}),
-        ('aaaaaaa', {'aaaa'}),
+        ('leetcode', {'leet', 'code'}, True),
+        ('aaaaaaa', {'aaaa', 'aaa'}, True),
+        ('aaaaaaa', {'aaaa'}, False),
         ]
 
 sl = Solution()
-for s, dict in cases:
-    print sl.wordBreak(s, dict)
+for s, dict , expect in cases:
+    assert sl.wordBreak(s, dict) is expect
