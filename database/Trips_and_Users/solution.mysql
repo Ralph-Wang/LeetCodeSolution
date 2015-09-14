@@ -1,0 +1,15 @@
+
+SELECT request_at as 'Day', ROUND(COUNT(cancelled_trips.id)/ COUNT(Trips.id), 2) AS 'Cancellation Rate'
+FROM Trips
+LEFT JOIN
+(SELECT id FROM Trips WHERE STATUS != 'completed')
+AS cancelled_trips
+ON Trips.id = cancelled_trips.id
+WHERE
+Trips.client_id not in (SELECT users_id FROM Users WHERE banned='Yes')
+AND
+Trips.driver_id not in (SELECT users_id FROM Users WHERE banned='Yes')
+AND
+request_at BETWEEN '2013-10-01' AND '2013-10-03'
+GROUP BY request_at 
+;
