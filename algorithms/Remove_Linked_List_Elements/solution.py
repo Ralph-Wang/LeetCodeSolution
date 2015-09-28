@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, x):
@@ -9,21 +13,25 @@ class Solution:
     # @param {integer} val
     # @return {ListNode}
     def removeElements(self, head, val):
-        h = head
-        pre = None
-        while h is not None:
-            if h.val == val:
-                print 'hit'
-                if pre is None:
-                    head = h.next
-                    pre = None
-                else:
-                    pre.next = h.next
-            else:
-                pre = h
-            h = h.next
-        return head
+        # # O(n)
+        # dummy = pre = ListNode(0)
+        # while head:
+        #     if head.val != val:
+        #         pre.next = ListNode(head.val)
+        #         pre = pre.next
+        #     head = head.next
+        # return dummy.next
 
+        # in-place
+        dummy = pre = ListNode(0)
+        dummy.next = head
+        while head:
+            if head.val == val:
+                pre.next = head.next
+            else:
+                pre = pre.next
+            head = head.next
+        return dummy.next
 
 
 
