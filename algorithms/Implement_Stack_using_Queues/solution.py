@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from collections import deque
 
 class Stack:
     # initialize your data structure here.
     def __init__(self):
-        self._q = []
+        self._q = deque()
+        self._top = None
 
 
     # @param x, an integer
@@ -16,8 +18,12 @@ class Stack:
 
     # @return nothing
     def pop(self):
-        return self._q.pop()
+        temp = deque()
+        while self._q:
+            temp.append(self._q.popleft())
 
+        while len(temp) > 1:
+            self._q.append(temp.popleft())
 
     # @return an integer
     def top(self):
@@ -26,5 +32,14 @@ class Stack:
 
     # @return an boolean
     def empty(self):
-        return len(self._q) == 0
+        return self._q == deque()
 
+
+s = Stack()
+
+for i in xrange(10):
+    s.push(i)
+
+while not s.empty():
+    print s.top()
+    s.pop()
